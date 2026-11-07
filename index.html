@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Diwali Suhana!</title>
+<style>
+:root{--bg1:#ffb3d1;--bg2:#ff6fa8;--ink:#5a0f33;--gold:#ffd35c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+html,body{height:100%;margin:0;overflow:hidden;font-family:"Trebuchet MS",Verdana,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2))}
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;gap:18px}
+.screen.on{display:flex;animation:in .5s ease}
+@keyframes in{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+h1{margin:0;font-size:clamp(28px,8vw,46px);text-shadow:0 3px 0 #fff8}
+p{margin:0;font-size:18px;font-weight:bold}
+.btn{border:0;border-radius:40px;padding:16px 38px;font-size:22px;font-weight:bold;color:#fff;background:linear-gradient(#ff3d8b,#d4166a);box-shadow:0 6px 0 #92104a,0 10px 25px #0004;cursor:pointer;animation:pulse 1.4s infinite}
+.btn:active{transform:translateY(4px)}
+@keyframes pulse{50%{transform:scale(1.07)}}
+.diyas{font-size:42px;animation:flick 1s infinite alternate}
+@keyframes flick{from{filter:drop-shadow(0 0 4px #ffb300)}to{filter:drop-shadow(0 0 16px #ff7a00);transform:translateY(-4px)}}
+.cards{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.card{background:#fff9;border:3px solid #fff;border-radius:24px;padding:14px;width:150px;cursor:pointer;box-shadow:0 8px 20px #0003;font-size:17px;font-weight:bold;color:var(--ink);font-family:inherit}
+.card:active{transform:scale(.94)}
+.card svg{width:100px;height:140px;display:block;margin:0 auto 6px;animation:sway 2s infinite ease-in-out}
+@keyframes sway{50%{transform:rotate(6deg)}}
+.big svg{width:170px;height:250px}
+.tapzone{cursor:pointer}
+#msg{font-size:clamp(26px,8.5vw,48px);line-height:1.15;word-break:break-word;color:#fff;text-shadow:0 0 12px #ff0,0 3px 0 #b0125a,0 0 30px #ff3d8b;animation:pop 1.2s infinite alternate}
+@keyframes pop{from{transform:scale(1) rotate(-2deg)}to{transform:scale(1.08) rotate(2deg)}}
+#cd{font-size:90px;font-weight:bold;color:#fff;text-shadow:0 4px 0 #b0125a;height:100px}
+#flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:5}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:4}
+.shake{animation:sh .5s}
+@keyframes sh{20%{transform:translate(-14px,8px)}40%{transform:translate(12px,-10px)}60%{transform:translate(-10px,-6px)}80%{transform:translate(8px,10px)}}
+#bomb.lit{animation:throb .35s infinite alternate}
+@keyframes throb{to{transform:scale(1.12)}}
+.deco{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes tw{50%{opacity:.3;scale:1.6}}
+.ring{position:absolute;left:50%;top:50%;width:290px;height:290px;margin:-145px 0 0 -145px;border:5px dotted #fff;border-radius:50%;animation:spin 7s linear infinite}
+.pin{position:absolute;left:50%;top:50%;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;background:repeating-conic-gradient(#ffd35c66 0 15deg,transparent 15deg 30deg);animation:spin 3s linear infinite reverse}
+.deco span{position:absolute;font-size:30px;animation:spin 4s linear infinite,tw 1.2s ease-in-out infinite}
+#s2 h1,#s2 p,#holder{position:relative;z-index:1}
+#nx{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:6;font-size:18px;padding:12px 24px;animation:none}
+.ob{display:flex;align-items:center;justify-content:center;gap:16px;min-height:120px}
+.ob .btn{animation:none;transition:all .3s}
+#q{font-size:clamp(24px,7vw,40px);line-height:1.25;font-weight:bold;color:#fff;text-shadow:0 3px 0 #b0125a,0 0 20px #ff3d8b;word-break:break-word}
+</style></head><body>
+<canvas id="c"></canvas><div id="flash"></div>
+
+<div class="screen on" id="s0">
+ <div class="diyas">🪔 🪔 🪔</div>
+ <h1>Diwali Surprise!</h1>
+ <p>Made specially for Suhana 💖</p>
+ <button class="btn" onclick="go('s1')">▶ Play the Game</button>
+</div>
+
+<div class="screen" id="s1">
+ <h1>Pick your firecracker</h1>
+ <div class="cards">
+  <button class="card" onclick="pick('spark')">
+   <svg viewBox="0 0 100 200"><line x1="50" y1="30" x2="50" y2="195" stroke="#555" stroke-width="3"/><rect x="42" y="28" width="16" height="95" rx="6" fill="#c98a2b"/><rect x="42" y="60" width="16" height="6" fill="#8a5a14"/><rect x="42" y="90" width="16" height="6" fill="#8a5a14"/><circle cx="50" cy="24" r="6" fill="#444"/></svg>
+   Fuljhuri ✨<br><small>Sparkler</small></button>
+  <button class="card" onclick="pick('color')">
+   <svg viewBox="0 0 100 200"><rect x="44" y="90" width="12" height="105" rx="4" fill="#7a4a1e"/><path d="M28 95 L36 40 H64 L72 95 Z" fill="#ff3d8b"/><path d="M33 70 H67 L69 82 H31 Z" fill="#ffd35c"/><path d="M36 40 H64 L63 46 H37 Z" fill="#2ec4ff"/><circle cx="50" cy="32" r="6" fill="#444"/></svg>
+   Rongmoshal<br><small>Colour Touch</small></button>
+ </div>
+</div>
+
+<div class="screen" id="s2">
+ <div class="deco"><div class="ring"></div><div class="pin"></div><span style="left:8%;top:10%">✨</span><span style="left:80%;top:8%">⭐</span><span style="left:12%;top:72%">🌟</span><span style="left:78%;top:70%">💫</span><span style="left:44%;top:4%">✨</span><span style="left:46%;top:88%">⭐</span><span style="left:4%;top:42%">💫</span><span style="left:88%;top:40%">🌟</span></div>
+ <h1 id="t2">Tap to light it! 🔥</h1>
+ <div class="big tapzone" id="holder"></div>
+ <p id="h2">👆 Tap the screen</p>
+</div>
+
+<div class="screen" id="s3">
+ <h1 id="t3">Now the BOMB! 💣</h1>
+ <div class="tapzone" id="bombwrap">
+  <svg id="bomb" width="200" height="230" viewBox="0 0 200 230">
+   <circle cx="100" cy="135" r="75" fill="#222"/><circle cx="75" cy="105" r="18" fill="#fff3"/>
+   <rect x="86" y="45" width="28" height="22" rx="4" fill="#555"/>
+   <path d="M100 47 Q100 20 140 18" stroke="#d9a441" stroke-width="5" fill="none"/>
+   <circle id="ftip" cx="140" cy="18" r="6" fill="#ffd35c"/>
+  </svg>
+ </div>
+ <div id="cd"></div>
+ <p id="h3">👆 Tap to light the fuse</p>
+</div>
+
+<div class="screen" id="s4">
+ <div class="diyas">🪔 🎆 🪔</div>
+ <div id="msg">HAPPPPPYYY DIWALIIIIIIIIIIIII SUHANAAAAAAAA</div>
+ <div class="diyas">💖 🎇 💖</div>
+ <button class="btn" id="nx" onclick="go('s5')">Next ➡</button>
+</div>
+
+<div class="screen" id="s5">
+ <div class="diyas">🪔 💖 🪔</div>
+ <div id="q">Kemonn lagloo tomar??<br><small style="font-size:.6em">(don’t click the bad option)</small></div>
+ <div class="ob" id="ob">
+  <button class="btn" id="bb" onclick="bad()">Bad</button>
+  <button class="btn" id="gb" style="background:linear-gradient(#35d07f,#14a85a);box-shadow:0 6px 0 #0c7a40,0 10px 25px #0004" onclick="good()">Good</button>
+ </div>
+</div>
+
+<script>
+var cv=document.getElementById('c'),cx=cv.getContext('2d'),P=[],W,H;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}rs();addEventListener('resize',rs);
+function $(i){return document.getElementById(i)}
+function go(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});$(id).classList.add('on')}
+function emit(x,y,n,o){o=o||{};for(var i=0;i<n;i++){var a=Math.random()*6.283,s=(o.speed||3)*(.3+Math.random());
+ P.push({x:x,y:y,vx:Math.cos(a)*s,vy:Math.sin(a)*s-(o.up||0),g:o.g==null?.08:o.g,l:0,m:(o.life||40)*(.6+Math.random()*.6),
+ c:o.color?o.color():'hsl('+(Math.random()*60+25)+',100%,'+(60+Math.random()*30)+'%)',r:o.size||2.2})}}
+function rnd(){return 'hsl('+Math.floor(Math.random()*360)+',100%,60%)'}
+function loop(){cx.globalCompositeOperation='source-over';cx.clearRect(0,0,W,H);cx.globalCompositeOperation='lighter';
+ for(var i=P.length-1;i>=0;i--){var p=P[i];p.l++;p.x+=p.vx;p.y+=p.vy;p.vy+=p.g;p.vx*=.985;
+  if(p.l>p.m){P.splice(i,1);continue}
+  cx.globalAlpha=1-p.l/p.m;cx.fillStyle=p.c;cx.beginPath();cx.arc(p.x,p.y,p.r*(1-p.l/p.m*.5),0,6.283);cx.fill()}
+ cx.globalAlpha=1;tick&&tick();requestAnimationFrame(loop)}
+var tick=null,cracker='spark',lit=false;
+function pick(t){cracker=t;lit=false;
+ $('holder').innerHTML=document.querySelectorAll('.card svg')[t=='spark'?0:1].outerHTML.replace('<svg','<svg id="hsvg"');
+ $('t2').textContent=t=='spark'?'Tap to light the Fuljhuri! 🔥':'Tap to light the Rongmoshal! 🔥';
+ $('h2').textContent='👆 Tap the screen';go('s2')}
+function tipPos(el){var r=el.getBoundingClientRect(),k=el.viewBox.baseVal;return {x:r.left+r.width*.5,y:r.top+r.height*(24/200)}}
+$('s2').addEventListener('click',function(){if(lit)return;lit=true;$('h2').textContent='Wow, so pretty! ✨';
+ var f=0,svg=$('hsvg');
+ tick=function(){f++;var p=tipPos(svg);if(f%20==0)emit(Math.random()*W,Math.random()*H*.7,25,{speed:3,life:45,g:.04,size:2,color:rnd});
+  if(cracker=='spark')emit(p.x,p.y,6,{speed:4,life:28,g:.12,size:1.8,color:function(){return Math.random()<.5?'#fff':'#ffd35c'}});
+  else emit(p.x,p.y,7,{speed:3.5,life:50,g:.05,up:3.5,size:2.6,color:rnd});
+  if(f>270){tick=null;$('t3').textContent='Now the BOMB! 💣';go('s3')}}});
+var bl=false;
+$('s3').addEventListener('click',function(){if(bl)return;bl=true;$('bomb').classList.add('lit');$('h3').textContent='Stay back… 😬';
+ var f=0,t0=performance.now(),tip=$('ftip');
+ tick=function(){f++;var r=tip.getBoundingClientRect();emit(r.left+r.width/2,r.top+r.height/2,4,{speed:2.5,life:20,g:.05,size:2,color:function(){return Math.random()<.5?'#fff':'#ffb300'}});
+  var left=3-(performance.now()-t0)/1000;$('cd').textContent=left>0?Math.ceil(left):'';
+  if(left<=0){tick=null;boom()}}});
+function boom(){var b=$('bomb').getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2;
+ $('bombwrap').style.visibility='hidden';$('cd').textContent='💥';
+ var fl=$('flash');fl.style.transition='none';fl.style.opacity=1;setTimeout(function(){fl.style.transition='opacity .6s';fl.style.opacity=0},40);
+ document.body.classList.add('shake');emit(x,y,260,{speed:11,life:70,g:.1,size:3,color:rnd});emit(x,y,80,{speed:5,life:50,size:4});
+ setTimeout(function(){document.body.classList.remove('shake');go('s4');celebrate()},1300)}
+function celebrate(){function b(){emit(Math.random()*W,Math.random()*H*.6+30,90,{speed:6,life:60,g:.06,size:2.6,color:rnd})}
+ b();b();setInterval(b,550)}
+var st=0,QT=['Kemonn lagloo tomar?? (don’t click the bad option)','why badd 😭😭 you badddd 😭 i am again asking how was it 😭😭😭','U are very baad Suhanaa 😤😭','HEHE NOW U CANT CLICK THE BAAADDD OPTIONN HEHEHE 😜'];
+var BS=[22,15,10],GS=[22,28,34];
+function draw(){$('q').textContent=QT[st];var g=$('gb'),b=$('bb');g.style.fontSize=GS[Math.min(st,2)]+'px';
+ if(st>=3){b.style.display='none'}else{b.style.fontSize=BS[st]+'px';b.style.padding=(BS[st]*.7)+'px '+(BS[st]*1.6)+'px'}}
+function bad(){st++;draw()}
+function good(){$('q').textContent='THANK YOU SUHANA HAPPPY DIWALI 💖🪔';$('ob').style.display='none';
+ for(var i=0;i<5;i++)setTimeout(function(){emit(Math.random()*W,Math.random()*H*.6+30,100,{speed:6,life:60,g:.06,size:2.6,color:rnd})},i*200)}
+loop();
+</script></body></html>
